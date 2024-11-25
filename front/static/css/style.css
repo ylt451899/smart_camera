@@ -1,0 +1,1019 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --bg: #222;
+    --cameraColor: #00aeff;
+    --clothColor: #e0da60;
+}
+body {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bg);
+    z-index: -100;
+}
+#nkust {
+    position: fixed;
+    top: 3%;
+    color: #fff;
+    font-family: consolas;
+    font-size: 50px;
+    margin-bottom: 7%;
+}
+#func_space{
+    height: 5%;
+    width: 100%;
+}
+#func {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    left: 2%;
+    gap: 25px;
+    z-index: 1;
+}
+#func li {
+    position: relative;
+    list-style: none;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+}
+#func li::before {
+    content: '';
+    position: absolute;
+    inset: 30px;
+    box-shadow: 0 0 0 10px var(--clr),
+    0 0 0 20px var(--bg),
+    0 0 0 22px var(--clr);
+    transition: 0.5s;
+}
+#func li:hover::before {
+    inset: 15px;
+}
+#func li::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg);
+    transform: rotate(45deg);
+    transition: 0.5s;
+}
+#func li:hover::after {
+    inset: 0px;
+    transform: rotate(0deg);
+}
+#func li a {
+    position: relative;
+    text-decoration: none;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#func li a i {
+    font-size: 2em;
+    transition: 0.5s;
+    color: var(--clr);
+}
+#func li:hover a i {
+    color: var(--clr);
+    transform: translateY(-40%);
+}
+#func li a span {
+    position: absolute;
+    font-family: consolas;
+    color: var(--clr);
+    opacity: 0;
+    transition: 0.5s;
+    transform: scale(0) translateY(200%);
+}
+#func li:hover a span {
+    opacity: 1;
+    transform: scale(1) translateY(100%);
+}
+#func li:hover a i,
+#func li:hover a span {
+    filter: drop-shadow(0 0 20px var(--clr)) drop-shadow(0 0 40px var(--clr)) drop-shadow(0 0 60px var(--clr));
+}
+.lightSQ {
+    position: absolute;
+    left: 10%;
+    top: 16%;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    color: #fff;
+    font-family: consolas;
+}
+.lightSQ li {
+    list-style: none;
+    position: relative;
+    padding: 10px 0;
+    transform: translate(10%);
+}
+.lightSQ li label {
+    font-size: 30px;
+    color: #fff;
+    padding-left: 30px;
+    cursor: pointer;
+}
+.lightSQ li label input {
+    opacity: 0;
+    cursor: pointer;
+}
+.lightSQ li label .check {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    background: #000;
+    display: block;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+.lightSQ li label .check:before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    background: #000b10;
+    border-radius: 2px;
+    transition: 0.5s;
+    transform: translateX(150px);
+}
+.lightSQ li label input:checked ~ .check:before {
+    background: var(--cameraColor);
+    box-shadow: 0 0 15px var(--cameraColor);
+    transform: translateX(0);
+}
+#screen {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 75%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#showCameraScene, #showCameraScene.double {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cameraScene {
+    display: none;
+    width: 80%;
+    height: 80vh;
+    background-color: #ffffff;
+}
+
+#showCameraScene.double .cameraScene {
+    margin: 0.5%;
+    width: 50%;
+    height: 50vh;
+    background-color: #ffffff;
+}
+
+#showCameraScene.many {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+}
+
+#showCameraScene.many::-webkit-scrollbar {
+    display: none;
+}
+
+#showCameraScene.many .cameraScene {
+    margin: 0.5%;
+    width: 49%;
+    height: 48vh;
+    background-color: #ffffff;
+}
+/* #showCameraScene,#showCameraScene.double{
+    width: 100%;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#showCameraScene #cameraScene{
+    width: 80%;
+    height:80vh;
+    background-color: #ffffff;
+}
+#showCameraScene.double #cameraScene{
+    margin: 0.5%;
+    width:50%;
+    height:50vh;
+    background-color: #ffffff;
+}
+#showCameraScene.many{
+    width: 100%;
+    height:100vh;
+    display: flex;
+    flex-wrap: wrap; 
+    overflow: auto;
+}
+#showCameraScene.many::-webkit-scrollbar {
+    display: none; 
+}
+#showCameraScene.many #cameraScene{
+    margin: 0.5%;
+    width: 49%;
+    height:48vh;
+    background-color: #ffffff;
+} */
+#showVideoScene,#showVideoScene.double{
+    width: 100%;
+    height:100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+#showVideoScene #videoScene{
+    width: 80%;
+    height:80vh;
+    background-color: #ffffff;
+    z-index: 5;
+}
+#showVideoScene.double #videoScene{
+    margin: 0.5%;
+    width:50%;
+    height:50vh;
+    background-color: #ffffff;
+    z-index: 5;
+}
+#showVideoScene.many{
+    width: 100%;
+    height:100vh;
+    display: flex;
+    flex-wrap: wrap; 
+    overflow: auto;
+    z-index: 5;
+}
+#showVideoScene.many::-webkit-scrollbar {
+    display: none; /* 隐藏滚动条 */
+}
+#showVideoScene.many #videoScene{
+    margin: 0.5%;
+    width: 49%;
+    height:48vh;
+    background-color: #ffffff;
+    z-index: 5;
+}
+#videoScene video {
+    z-index: 100000; /* 确保 video 控件在最上层 */
+}
+
+/* 设置颜色选择器的初始位置 */
+/* 初始状态下，颜色选择器在屏幕左侧不可见 */
+.color-selector {
+    position: absolute;
+    top: 10%;
+    /* left: -850px;  */
+    left: 100%;
+    width: 0;
+    height: 100%;
+    background-color: var(--bg);
+    opacity: 0; /* 设置透明度为0，隐藏 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    overflow: hidden;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; /* 平滑移动和淡入淡出效果 */
+    z-index: -1;
+}
+
+/* 当复选框被选中时，颜色选择器先移入屏幕 */
+.color-selector.show {
+    width: 880px;
+    opacity: 1; /* 变为不透明 */
+    z-index: 1;
+}
+
+/* 颜色选项的样式 */
+.color-option {
+    position: relative;
+    cursor: pointer;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+.color-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.color-box {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.color-option input[type="radio"]:checked + .color-box {
+    border: 2px solid #000; /* 被选中的颜色块周围显示边框 */
+    transform: scale(1.2); /* 被选中的颜色块稍微放大 */
+}
+/* 查詢人物資訊 */
+#showSearchInformationScene{
+    margin:2%;
+    width: 100%;
+    height:100vh;
+    display: flex;
+    flex-wrap: wrap; 
+    overflow: auto;
+    justify-content: center;
+    /* background-color: #19509d; */
+  }
+  #showSearchInformationScene ::-webkit-scrollbar {
+    display: none; /* 隐藏滚动条 */
+  }
+  #showSearchInformationScene #SearchInformationScene{
+    margin: 1%;
+    width: 20%;
+    height:50%;
+    background-color: #ffffff;
+    position: relative;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+  }
+  #showSearchInformationScene #SearchInformationScene #picture{
+    width: 100%;
+    height: 100%;
+  }
+  #showSearchInformationScene #SearchInformationScene #picture img{
+    width: 100%;
+    height: 100%;
+  }
+  .info-box {
+    position: absolute;
+    top: 0;
+    left: 100%; /* 初始位置在右側外部 */
+    width: 250px;
+    padding: 10px;
+    background-color: #424242;
+    border: 1px solid #424242;
+    color: white;
+    transform: translateX(0%);
+    transition: transform 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.info-box.visible {
+    transform: translateX(0); /* 滑出效果 */
+    opacity: 1;
+    pointer-events: auto;
+}
+.buttons {
+    position: absolute;
+    left: 10%;
+    top: 16%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    z-index: 1;
+}
+.buttons label {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.buttons label input {
+    appearance: none;
+}
+.buttons label span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#555353, #363535, #303030);
+    border: 2px solid #222;
+    border-radius: 6px;
+    box-shadow: inset 0 5px 1px rgba(0, 0, 0, 0.35),
+    0 5px 5px rgba(0, 0, 0, 0.5),
+    0 15px 25px rgba(0, 0, 0, 0.35);
+}
+.buttons label input:checked ~ span {
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.35),
+    inset 0 5px 5px rgba(0, 0, 0, 0.5),
+    inset 0 15px 25px rgba(0, 0, 0, 0.35);
+}
+.buttons label span::before {
+    content: '';
+    position: absolute;
+    inset: 5px 3px;
+    border-top: 1px solid #ccc;
+    filter:  blur(2px);
+}
+.buttons label i {
+    position: relative;
+    z-index: 10;
+    font-size: 1.5em;
+    color: #111;
+}
+.buttons label input:checked ~ i {
+    color: #fff;
+    text-shadow: 0 0 5px #219cf3,
+    0 0 8px #219cf3;
+}
+.cameraSel {
+    position: absolute;
+    left: 12%;
+    top: 27%;
+    margin: 0 auto;
+    font-family: consolas;
+}
+.cameraSel div {
+    margin: 10px;
+}
+.cameraSel div label {
+    cursor: pointer;
+}
+.cameraSel div label input[type="checkbox"] {
+    display: none;
+}
+.cameraSel div label span {
+    position: relative;
+    display: inline-block;
+    background: #424242;
+    padding: 15px 30px;
+    color: #555;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+    font-size: 20px;
+    transition: 0.5s;
+    user-select: none;
+    overflow: hidden;
+}
+.cameraSel div label span:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: rgba(255, 255, 255, .1);
+}
+.cameraSel div:nth-child(1) label input[type="checkbox"]:checked ~ span {
+    background: #e91e63;
+    color: #fff;
+    box-shadow: 0 2px 20px #e91e63;
+}
+.cameraSel div:nth-child(2) label input[type="checkbox"]:checked ~ span {
+    background: #0f0;
+    color: #fff;
+    box-shadow: 0 2px 20px #0f0;
+}
+.cameraSel div:nth-child(3) label input[type="checkbox"]:checked ~ span {
+    background: #ffeb3b;
+    color: #fff;
+    box-shadow: 0 2px 20px #ffeb3b;
+}
+.cameraSel div:nth-child(4) label input[type="checkbox"]:checked ~ span {
+    background: #2e2efe;
+    color: #fff;
+    box-shadow: 0 2px 20px #2e2efe;
+}
+.timeScreen {
+    position: absolute;
+    left: 10%;
+    top: 27%;
+    font-size: 30px;
+    color: #fff;
+    font-family: consolas;
+}
+.shirtChooser {
+    position: absolute;
+    left: 9%;
+    top: 27%;
+    z-index: 100;
+}
+.shirtChooser li label input:checked ~ .check:before {
+    background: var(--clothColor);
+    box-shadow: 0 0 15px var(--clothColor);
+}
+.replay {
+    position: absolute;
+    left: 12%;
+    top: 16%;
+    font-family: consolas;
+}
+.replay ul li {
+    list-style: none;
+}
+.replay ul li a {
+    position: relative;
+    font-size: 35px;
+    text-decoration: none;
+    color: #fff;
+    margin: 20px 0;
+    display: block;
+    font-weight: bold;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+}
+.replay ul li a:before {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: -10px;
+    width: 120%;
+    height: 20px;
+    background: #ff3b3b;
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s;
+}
+.replay ul li a:hover:before  {
+    transform: scaleX(1);
+}
+.replay ul li a.active:before {
+    transform: scaleX(1); /* 确保红色线条完全显示 */
+}
+.setFileBut {
+    position: absolute;
+    left: 30%;
+    top: 8%;
+    padding: 10px 30px;
+    background: #363636;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-family: consolas;
+    font-size: 35px;
+    overflow: hidden;
+}
+.setFileBut span {
+    position: relative;
+    z-index: 1;
+}
+.setFileBut::before {
+    content: '';
+    position: absolute;
+    top: var(--y);
+    left: var(--x);
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: #03be83;
+    transition: width 0.5s, height 0.5s;
+}
+.setFileBut:hover::before {
+    width: 350px;
+    height: 350px;
+}
+.setFileBut.updateBut {
+    left: 60%;
+    top: 8%;
+}
+/*  */
+.updateScreen {
+    position: absolute;
+    left: 37%;
+    top: 50%;
+    font-family: consolas;
+}
+.file {
+    position: absolute;
+    left: 30%;
+    top: 50.5%;
+    color: #fff;
+    font-size: 30px;
+    font-family: consolas;
+}
+#fileInput {
+    display: none;
+}
+.fileLabel {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #25d366;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+}
+.fileLabel:hover {
+    background-color: #1ae57c;
+}
+.fileDropdown {
+    position: absolute;
+    left: 50%;
+    top: 29%;
+    width: 200px;
+    height: 50px;
+    font-family: consolas;
+}
+.fileDropdown .option div:hover {
+    background: #25d366;
+}
+.updSaveBut {
+    position: absolute;
+    left: 30%;
+    top: 65%;
+    background: linear-gradient(90deg, #01c875, #a3fc55);
+}
+.inputBox {
+    position: absolute;
+    left: 30%;
+    top: 29.5%;
+    width: 250px;
+    font-family: consolas;
+}
+.inputBox input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255 , 255, 255, 0.25);
+    background: #1d2b3a;
+    border-radius: 5px;
+    outline: none;
+    color: #fff;
+    font-size: 1.5em;
+    transition: 0.5s;
+}
+.inputBox span {
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1.5em;
+    color: rgba(255, 255, 255, 0.25);
+    text-transform: uppercase;
+    transition: 0.5s;
+}
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span {
+    color: #1ae57c;
+    transform: translateX(10px) translateY(-7px);
+    font-size: 1em;
+    padding: 0 10px;
+    background: #1d2b3a;
+    border-left: 1px solid #1ae57c;
+    border-right: 1px solid #1ae57c;
+    letter-spacing: 0.2em;
+}
+.inputBox input:valid,
+.inputBox input:focus {
+    border: 1px solid #1ae57c;
+}
+/*  */
+.dropdownFont {
+    position: absolute;
+    left: 30%;
+    top: 55%;
+    color: #fff;
+    font-size: 30px;
+    font-family: consolas;
+}
+.dropdown { 
+    position: absolute;
+    /* left: 38%;
+    top: 54%; */
+    width: 200px;
+    height: 50px;
+    font-family: consolas;
+}
+.dropdown::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    right: 28px;
+    width: 12px;
+    height: 2px;
+    background: #555;
+    z-index: 10;
+    transform: rotate(40deg);
+    transition: 0.5s;
+}
+.dropdown.active::before {
+    right: 20px;
+}
+.dropdown::after {
+    content: '';
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    width: 12px;
+    height: 2px;
+    background: #555;
+    z-index: 10;
+    transform: rotate(-40deg);
+    transition: 0.5s;
+}
+.dropdown.active::after {
+    right: 28px;
+}
+.dropdown input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 16px;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    outline: none;
+    border: none;
+}
+.dropdown .option {
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 30px 30px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.25s;
+}
+.dropdown.active .option {
+    visibility: visible;
+    opacity: 1;
+    z-index: 20;
+}
+.dropdown .option div {
+    padding: 12px 20px;
+    cursor: pointer;
+
+}
+.dropdown .option div:hover {
+    background: #25d366;
+    color: #fff;
+}
+.fileFont {
+    top: 34%;
+}
+.menu {
+    position: absolute;
+    left: 38%;
+    top: 23%;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menu label {
+    position: absolute;
+    left: -20px;
+    transform-origin: 120px;
+    transition: 0.5s;
+    transition-delay: calc(0.1s * var(--i));
+    transform: rotate(0deg) translateX(80px);
+}
+.menu.active label {
+    transform: rotate(calc(360deg / 5 * var(--i)));
+}
+.menu.active label i {
+    background: #fff;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+}
+.menu label i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background: #222;
+    border-radius: 50%;
+    transform: rotate(calc(360deg / -5 * var(--i)));
+    color: #111;
+    transition: 0.5s;
+    font-size: 1.35em;
+}
+.menu label i:hover {
+    color: #25d366;
+}
+.menu label input {
+    appearance: none;
+}
+.menu label input:checked ~ i {
+    color: #1ae57c;
+}
+.moduleToggle {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+    font-size: 2em;
+    transition: transform 1.25s;
+}
+.menu.active .moduleToggle {
+    transform: rotate(315deg);
+}
+.saveBut {
+    position: absolute;
+    /* left: 55%;
+    top: 52.5%; */
+    padding: 12px 36px;
+    margin: 10px 0;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 25px;
+    letter-spacing: 2px;
+    border-radius: 40px;
+    overflow: hidden;
+    background: linear-gradient(90deg, #01c875, #a3fc55);
+    font-family: consolas;
+}
+.saveBut span {
+    position: absolute;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: animate 1s linear infinite;
+}
+@keyframes animate {
+    0% {
+        width: 0px;
+        height: 0px;
+        opacity: 0.5;
+    }
+    100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+    }
+}
+.drawFont {
+    position: absolute;
+    left: 25%;
+    top: 8%;
+}
+.drawDropdown {
+    position: absolute;
+    left: 33%;
+    top: 7%;
+}
+.drawDropdown .option div:hover {
+    background: #f32ec8;
+}
+.drawSaveBut {
+    position: absolute;
+    left: 67%;
+    top: 6%;
+    background: linear-gradient(90deg, #c80196, #bf55fc);
+}
+.deleteBut {
+    position: absolute;
+    left: 78%;
+    top: 6%;
+    background: linear-gradient(90deg,#ff0000, #f55045);
+}
+.timeSaveBut {
+    position: absolute;
+    left: 15%;
+    top: 63%;
+    background: linear-gradient(90deg, #fff200, #fcdd55);
+}
+.showdrawcanva{
+    position: absolute;
+    width: 50%;
+    height: 60%;
+    /* width: 640px;
+    height: 360px; */
+    left: 25%;
+    top: 25%;
+    background-color: white;
+}
+/* .showdrawcanva {
+    position: relative;
+    width: 100%;
+    height: 100%;
+} */
+#drawingCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+
+.safe_danger_area {
+    position: absolute;
+    left: 49%;
+    top: 6%;
+    width: 15%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.safe_danger_area div label input[type="radio"] {
+    display: none;
+}
+.safe_danger_area div {
+    flex: 1;
+    height: 100%;
+    width: 100%;
+}
+.safe_danger_area div label{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.safe_danger_area #safe_area label span {
+    position: relative;
+    /* display: inline-block; */
+    background: #424242;
+    padding: 22px 40px;
+    height: 100%;
+    width: 100%;
+    color: #555;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    font-size: 20px;
+    transition: 0.5s;
+    user-select: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+.safe_danger_area #danger_area label span {
+    position: relative;
+    /* display: inline-block; */
+    background: #424242;
+    padding: 22px 40px;
+    height: 100%;
+    width: 100%;
+    color: #555;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    font-size: 20px;
+    transition: 0.5s;
+    user-select: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+/* .safe_danger_area  div label span:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, .1);
+} */
+
+.safe_danger_area #safe_area label input[type="radio"]:checked ~ span {
+    background: #0f0;
+    color: #fff;
+    box-shadow: 0 2px 20px #0f0;
+}
+
+.safe_danger_area #danger_area label input[type="radio"]:checked ~ span {
+    background: #e91e63;
+    color: #fff;
+    box-shadow: 0 2px 20px #e91e63;
+}

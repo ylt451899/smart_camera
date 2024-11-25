@@ -1,0 +1,12 @@
+[
+    {
+        "name": "anderson",
+        "filename": "uploads\\success.png",
+        "encode": null
+    },
+    {
+        "name": "unknown",
+        "filename": "uploads\\fail.png",
+        "encode": null
+    }
+]

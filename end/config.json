@@ -1,0 +1,35 @@
+{
+    "cameras": [
+        {
+            "name": "camera1",
+            "source": 0,
+            "images": "video/start/1.jpg",
+            "playback_speed": 0,
+            "models": [],
+            "safearea": [],
+            "dangerarea": []
+        },
+        {
+            "name": "camera2",
+            "source": "video/arms.mp4",
+            "images": "video/start/business.jpg",
+            "playback_speed": -10,
+            "models": [
+                "1"
+            ],
+            "safearea": [],
+            "dangerarea": []
+        },
+        {
+            "name": "camera3",
+            "source": "video/face_detect_success.mp4",
+            "images": "video/start/walk2.jpg",
+            "playback_speed": 0,
+            "models": [
+                "3"
+            ],
+            "safearea": [],
+            "dangerarea": []
+        }
+    ]
+}
