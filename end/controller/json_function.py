@@ -6,6 +6,8 @@ def read_json():
         data = json.load(f)
     return data
 
+
+
 # 写入JSON文件
 def write_json(data):
     with open('config.json', 'w') as f:
