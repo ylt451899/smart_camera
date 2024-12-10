@@ -21,8 +21,6 @@ import time
 import shutil
 # from controller
 from controller.search.search_information import select_person_information
-from controller.model_select.model_select import model_select_information
-# from controller.draw.safearea import safearea_information
 
 #model_detect
 from controller.model_detect.detect_arms import detect_arms
@@ -162,7 +160,7 @@ def process_camera_feed(camera_info, cap):
         frame_base64 = encode_frame(frame)
         # 傳送到對應的事件名稱
         socketio.emit(f"camera_stream_{camera_info['name']}", {'frame': frame_base64})
-        # socketio.sleep(0.03)  # 控制幀率
+        socketio.sleep(0.03)  # 控制幀率
         # 根據 playback_speed 調整播放速度
         # cv2.waitKey(camera_info['playback_speed'])
 

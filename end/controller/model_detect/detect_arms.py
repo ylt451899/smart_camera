@@ -29,6 +29,6 @@ def detect_arms(frame,camera_name):
     if suspicious_detected and current_time - last_email_time > EMAIL_INTERVAL:
         # 將 current_time 轉換為好觀察的格式
         formatted_time = datetime.fromtimestamp(current_time).strftime('%Y-%m-%d %H:%M:%S')
-        send_email(f"{camera_name}有人進入危險區域! 時間:{formatted_time}")
+        # send_email(f"{camera_name}有人進入危險區域! 時間:{formatted_time}")
         last_email_time = current_time  # 更新上次寄送郵件的時間
     return frame

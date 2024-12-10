@@ -154,8 +154,8 @@ def detect_person(frame, camera_info):
                     w, h = x2 - x1, y2 - y1
                     
                     # 繪製追蹤框
-                    cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
-                    cv2.putText(frame, f'Person {track_id}', (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
+                    # cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)
+                    # cv2.putText(frame, f'Person {track_id}', (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
                     # 記錄/更新最大尺寸和時間
                     if track_id not in person_max_size:
                         # 如果是新的人物，初始化記錄
