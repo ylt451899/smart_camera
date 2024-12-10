@@ -72,7 +72,7 @@ function updateVideoScene(activeCameras,model_config) {
             showVideoSceneHTML += `
                 <div id="videoScene">
                     <video controls width="100%" height="100%">
-                        <source src="/static/${model_config[activeCameras[i]].source}" type="video/mp4">
+                        <source src="./static/${model_config[activeCameras[i]].source}" type="video/mp4">
                     </video>
                 </div>
             `;
